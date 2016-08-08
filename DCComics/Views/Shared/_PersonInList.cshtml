@@ -16,7 +16,7 @@
     <div class="col-md-2">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpEditPerson">Edit</button> |
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpDetailsPerson">Details</button> |
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpDeletePerson">Delete</button>       
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpDeletePerson">Delete</button>
     </div>
 </div>
 
@@ -46,7 +46,7 @@
         <div class="modal-content">
             <!-- header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dissmiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3>Details</h3>
             </div>
 
@@ -58,7 +58,10 @@
             </div>
             <!-- submit button-->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default close" data-dissmiss="modal" data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
+
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-md" data-dismiss="modal" data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
+
             </div>
         </div>
     </div>
@@ -68,7 +71,7 @@
         <div class="modal-content">
             <!-- header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dissmiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3>Delete</h3>
             </div>
 
