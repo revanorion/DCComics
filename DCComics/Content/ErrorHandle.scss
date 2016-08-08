@@ -1,0 +1,9 @@
+﻿.validation-summary-errors-alerts{
+ul{
+    margin: 0;
+    list-style: none;
+    li{
+        @extend .alert;
+        @extend .alert-danger;
+    }
+}}
