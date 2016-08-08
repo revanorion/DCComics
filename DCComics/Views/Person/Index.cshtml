@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DCComics.Model.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_PersonInList", item);
+
+    }
+    <div class="row">
+        <div class="col-md-offset-8">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpCreatePerson">Create New Person</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="popUpCreatePerson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal">&times;</button>
+                <h3>Create Person</h3>
+            </div>
+
+            <!-- body form -->
+            <div class="modal-body">
+                @*<iframe src='@Url.Action("Create")'></iframe>*@
+                @Html.Partial("Create", new DCComics.Model.Person())
+
+            </div>
+            <!-- submit button-->
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
