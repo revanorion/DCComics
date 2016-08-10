@@ -25,9 +25,13 @@
         @Html.Partial("_PersonInList", item);
 
     }
+
     <div class="row">
-        <div class="col-md-offset-8">
+        <div class="col-md-offset-6">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpCreatePerson">Create New Person</button>
+        </div>
+        <div class="col-md-offset-6">
+            <button type="button" class="btn btn-success" id="btnservice">Get People</button>
         </div>
     </div>
 </div>
@@ -38,7 +42,7 @@
         <div class="modal-content">
             <!-- header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dissmiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3>Create Person</h3>
             </div>
 
@@ -50,11 +54,102 @@
             </div>
             <!-- submit button-->
             <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<div>
+    <table id="results-table" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Birthday)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
 
 
 
 
+
+            $('#btnservice').click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetPeople", "Person")',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert("Success");
+                        for (var prop in data) {
+                            console.log("data." + prop + " = " + data[prop].FirstName);
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            });
+
+
+
+            var table = $("#results-table").DataTable({
+                ajax: {
+                    url: '@Url.Action("GetPeople", "Person")',
+                    type: 'POST',
+                    dataSrc: "",
+                    //dataType: 'json',
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                },
+                lengthMenu: [[10, 15, 20, 50, -1], [10, 15, 20, 50, "All"]],
+                pageLength: 15,
+                language: {
+                    search: "Filter:"
+                },
+                order: [[1, "asc"]],
+                //dom: 'lBftip',
+                //buttons: [ 'excel'],
+                columns: [
+                    {
+                        data: "Id",
+                        visible: false
+                    },
+                    {
+                        data: "FirstName",
+                        visible: true,
+                        render: function (data, type, full, meta) {
+                            var id = data.Id;
+                            return data @*@Html.Partial("Details",Model.Where(p=>p.Id== id))*@
+                        }
+                    },
+                     {
+                         data: "LastName",
+                         visible: true
+                     },
+                      {
+                          data: "Address",
+                          visible: true
+                      }
+                ]
+            });
+        });
+    </script>
+}

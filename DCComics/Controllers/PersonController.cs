@@ -20,6 +20,12 @@ namespace DCComics.Controllers
             return View(db.Persons.ToList());
         }
 
+        [HttpPost]
+        [ActionName("GetPeople")]
+        public ActionResult GetPeople()
+        {
+            return Json(db.Persons.ToList(), JsonRequestBehavior.AllowGet);            
+        }
         // GET: Person/Details/5
         public ActionResult Details(long? id)
         {
