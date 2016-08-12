@@ -21,6 +21,7 @@ namespace DCComics
                         "~/Scripts/jquery-ui-{version}.js",
                         "~/Scripts/jquery.validate.js",
                         "~/Scripts/jquery.validate.unobtrusive.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/common.js"));
 
@@ -29,8 +30,8 @@ namespace DCComics
                       "~/Content/site.css",
                       "~/Content/themes/base/*.css",
                       "~/Content/ErrorHandle.scss",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css")
-                      
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/General.css")                      
                       );
 
             BundleTable.EnableOptimizations = true;

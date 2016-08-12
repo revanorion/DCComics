@@ -38,7 +38,7 @@ namespace DCComics.Controllers
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return PartialView(person);
         }
 
         // GET: Person/Create

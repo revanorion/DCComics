@@ -22,8 +22,91 @@
     </div>
     @foreach (var item in Model)
     {
-        @Html.Partial("_PersonInList", item);
+        <div class="row">
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Address)
+            </div>
+            <div class="col-md-2 btn-group btn-group-sm">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpDetailsPerson">Details</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popUpDeletePerson">Delete</button>
+            </div>
+        </div>
+        <div class="modal fade" id="popUpEditPerson">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Edit</h3>
+                    </div>
 
+                    <!-- body form -->
+                    <div class="modal-body">
+                        @Html.Partial("Edit", Model.FirstOrDefault(p=>p.Id==item.Id))
+                    </div>
+                    <!-- submit button-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="popUpDetailsPerson">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Details</h3>
+                    </div>
+
+                    <!-- body form -->
+                    <div class="modal-body">
+                        @*<iframe src='@Url.Action("Create")'></iframe>*@
+                        @Html.Partial("Details", Model.FirstOrDefault(p => p.Id == item.Id))
+
+                    </div>
+                    <!-- submit button-->
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-md" data-dismiss="modal" data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="popUpDeletePerson">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Delete</h3>
+                    </div>
+
+                    <!-- body form -->
+                    <div class="modal-body">
+                        @*<iframe src='@Url.Action("Create")'></iframe>*@
+                        @Html.Partial("Delete", Model.FirstOrDefault(p=>p.Id==item.Id))
+                    </div>
+                    <!-- submit button-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 
     <div class="row">
@@ -35,6 +118,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <div class="modal fade" id="popUpCreatePerson">
@@ -59,6 +144,37 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="popUpTableItemView">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Details</h3>
+            </div>
+
+            <!-- body form -->
+            <div class="modal-body" id="popUpTableItemPartialView">
+
+
+            </div>
+            <!-- submit button-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 <div>
     <table id="results-table" class="table">
         <thead>
@@ -79,6 +195,9 @@
         </thead>
     </table>
 </div>
+
+
+
 
 @section scripts
 {
@@ -135,21 +254,51 @@
                     {
                         data: "FirstName",
                         visible: true,
-                        render: function (data, type, full, meta) {
-                            var id = data.Id;
-                            return data @*@Html.Partial("Details",Model.Where(p=>p.Id== id))*@
-                        }
+
                     },
-                     {
-                         data: "LastName",
-                         visible: true
-                     },
-                      {
-                          data: "Address",
-                          visible: true
-                      }
+                 {
+                     data: "LastName",
+                     visible: true
+                 },
+                  {
+                      data: "Address",
+                      visible: true
+                  }
                 ]
             });
+
+
+
+            $("#results-table").on('click', 'tr', function () {
+                var mydata = table.row(this).data();
+                //alert('You clicked on ' + data.FirstName + '\'s row');
+                $.ajax({
+                    url: '@Url.Action("Details", "Person")',
+                    type: 'GET',
+                    data: { 'id': mydata.Id },
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#popUpTableItemPartialView').html(data);
+                        $('#popUpTableItemView').modal('show')
+                    }
+                });
+            });
+
+            $("#results-table").on('mouseenter', 'td', function () {
+                var colIdx = table.cell(this).index().column;
+                var rowIdx = table.cell(this).index().row;
+                $(table.cells().nodes()).removeClass('highlight');
+                $(table.column(colIdx).nodes()).addClass('highlight');
+                $(table.row(rowIdx).nodes()).addClass('highlight');
+            });
+
+
+
+
+
+
+
+
         });
     </script>
 }
