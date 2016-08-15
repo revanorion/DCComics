@@ -8,27 +8,27 @@
 
     @Styles.Render("~/bundles/styles")
 </head>
-<body>    
+<body>
     <nav id="menuDiv" class="navbar">
         <div class="container-fluid">
 
             <!-- Logo-->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                <a href="~//Home/Index" id="dLabel" class="navbar-brand dropdown-toggle" role="button">DC COMICS</a>
+                <a href="~//Home/Index" class="navbar-brand dropdown-toggle" role="button">DC COMICS</a>
             </div>
 
             <!--Menu Items-->
             <div class="collapse navbar-collapse" id="mainNavBar">
                 <ul class="nav navbar-nav">
-                    <li><a id="dLabel" class="dropdown-toggle" role="button" href="~//LocationTypes/Index">LocationType Code Table</a></li>
-                    <li><a id="dLabel" class="dropdown-toggle" role="button" href="~//Person/Index">Person</a></li>
-                    <li><a id="dLabel" class="dropdown-toggle" role="button" href="#">Super Heroes</a></li>
-                    <li><a id="dLabel" class="dropdown-toggle" role="button" href="#">Super Villans</a></li>
+                    <li><a class="dropdown-toggle" href="~//LocationTypes/Index">LocationType Code Table</a></li>
+                    <li><a class="dropdown-toggle" href="~//Person/Index">Person</a></li>
+                    <li><a class="dropdown-toggle" href="#">Super Heroes</a></li>
+                    <li><a class="dropdown-toggle" href="#">Super Villans</a></li>
                     <!-- drop down menu-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">DC Universe <span class="caret"></span></a>
@@ -45,7 +45,7 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        
+
     </div>
     @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
