@@ -6,7 +6,7 @@
 
 <h2>Index</h2>
 <div class="container-fluid">
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </div>
@@ -24,15 +24,41 @@
     {
         @Html.Partial("_PersonInList", item);
 
-    }
+    }*@
+
+
+    <div class="row">
+        <table id="results-table" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+
+
+
+
+
 
     <div class="row">
         <div class="col-md-offset-6">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpCreatePerson">Create New Person</button>
-        </div>
-        <div class="col-md-offset-6">
-            <button type="button" class="btn btn-success" id="btnservice">Get People</button>
-        </div>
+        </div>        <
     </div>
 </div>
 
@@ -77,8 +103,50 @@
             </div>
             <!-- submit button-->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"  data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal"  data-toggle="modal" data-target="#popUpDeletePerson">Delete</button>
+                <button type="button" id="myclose" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="popUpEditPerson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Edit</h3>
+            </div>
+
+            <!-- body form -->
+            <div class="modal-body" id="popUpEditPersonPartialView">
+
+            </div>
+            <!-- submit button-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="popUpDeletePerson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3>Delete</h3>
+            </div>
+
+            <!-- body form -->
+            <div class="modal-body" id="popUpDeletePersonPartialView">
+
+            </div>
+            <!-- submit button-->
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -92,30 +160,6 @@
 
 
 
-<div>
-    <table id="results-table" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Birthday)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-            </tr>
-        </thead>
-    </table>
-</div>
-
-
-
-
      @section scripts
 {
      @Scripts.Render("~/bundles/jqueryval")
@@ -124,27 +168,25 @@
 
 
 
-
-
-        $('#btnservice').click(function () {
-            $.ajax({
-                url: '@Url.Action("GetPeople", "Person")',
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    alert("Success");
-                    for (var prop in data) {
-                        console.log("data." + prop + " = " + data[prop].FirstName);
-                    }
-                },
-                error: function (reponse) {
-                    alert("error : " + reponse);
-                }
-            });
+        $("#popUpEditPerson").on("click", function (event) {
+            /* if you want to use the same modal, you must unbind() actions because bootstrap
+               remember olders actions on Modal element */
+            alert('Hello world!');
+            //$("#popUpEditPerson").unbind();
+            //var btn = $(this);
+            //var id = $(this).data("id"); /* "data-id" attribute in html */
+            //$.ajax({
+            //    type: 'POST',
+            //    //url: content_direct_delivery_in_html,
+            //    data: { id: id },
+            //    success: function (html) {
+            //        $('#popUpEditPerson').modal().on('shown.bs.modal', function (e) {
+            //            $("#popUpEditPerson_body").html(html);
+            //        });
+            //    }
+            //});
         });
-
-
-
+         
         var table = $("#results-table").DataTable({
             ajax: {
                 url: '@Url.Action("GetPeople", "Person")',
@@ -160,9 +202,7 @@
             language: {
                 search: "Filter:"
             },
-            order: [[1, "asc"]],
-            //dom: 'lBftip',
-            //buttons: [ 'excel'],
+            order: [[1, "asc"]],          
             columns: [
                 {
                     data: "Id",
@@ -186,7 +226,7 @@
 
 
 
-        $("#results-table").on('click', 'tr', function () {
+        $("#results-table tbody").on('click', 'tr', function () {
             var mydata = table.row(this).data();
             //alert('You clicked on ' + data.FirstName + '\'s row');
             $.ajax({
@@ -194,11 +234,11 @@
                 type: 'GET',
                 data: {'id' : mydata.Id},
                 dataType: 'html',
-                success: function (data) {               
-                    $('#popUpTableItemPartialView').html(data);
+                success: function (data) {                   
+                    $('#popUpTableItemPartialView').html(data);                    
                     $('#popUpTableItemView').modal('show')
                 }
-            });
+            });           
         });
 
         $("#results-table").on('mouseenter', 'td', function () {
@@ -208,14 +248,7 @@
             $(table.column(colIdx).nodes()).addClass('highlight');
             $(table.row(rowIdx).nodes()).addClass('highlight');
         });
-
-
-
-
-
-
-
-
+         
     });
     </script>
 }

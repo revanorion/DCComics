@@ -4,7 +4,7 @@
 
 
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-2">
         @Html.DisplayFor(model => model.FirstName)
 
@@ -23,7 +23,7 @@
         <button type="button" class="btn btn-default" data-id="@Model.Id" data-toggle="modal" data-target="#popUpDetailsPerson">Details</button>
         <button type="button" class="btn btn-default" data-id="@Model.Id" data-toggle="modal" data-target="#popUpDeletePerson">Delete</button>
     </div>
-</div>
+</div>*@
 
 <div class="modal fade" id="popUpEditPerson">
     <div class="modal-dialog">
@@ -94,32 +94,3 @@
         </div>
     </div>
 </div>
-@section scripts
-{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $(document).ready(function () {
-                //change dis shit
-                $(".button").on("click", function (event) {
-                    /* if you want to use the same modal, you must unbind() actions because bootstrap
-                       remember olders actions on Modal element */
-
-                    $("#popUpEditPerson").unbind();
-                    var btn = $(this);
-                    var id = $(this).data("id"); /* "data-id" attribute in html */
-                    $.ajax({
-                        type: 'POST',
-                        //url: content_direct_delivery_in_html,
-                        data: { id: id },
-                        success: function (html) {
-                            $('#popUpEditPerson').modal().on('shown.bs.modal', function (e) {
-                                $("#popUpEditPerson_body").html(html);
-                            });
-                        }
-                    });
-                });
-            });
-    </script>
-}

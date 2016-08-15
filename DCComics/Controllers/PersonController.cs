@@ -76,7 +76,7 @@ namespace DCComics.Controllers
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return PartialView(person);
         }
 
         // POST: Person/Edit/5
@@ -107,7 +107,7 @@ namespace DCComics.Controllers
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return PartialView(person);
         }
 
         // POST: Person/Delete/5

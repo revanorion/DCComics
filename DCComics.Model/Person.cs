@@ -22,9 +22,6 @@ namespace DCComics.Model
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]        
-        public DataType Birthday { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string Address { get; set; }
