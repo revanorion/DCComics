@@ -6,27 +6,7 @@
 
 <h2>Index</h2>
 <div class="container-fluid">
-    @*<div class="row">
-        <div class="col-md-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </div>
-        <div class="col-md-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </div>
-        <div class="col-md-2">
-            @Html.DisplayNameFor(model => model.Birthday)
-        </div>
-        <div class="col-md-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </div>
-    </div>
-    @foreach (var item in Model)
-    {
-        @Html.Partial("_PersonInList", item);
-
-    }*@
-
-
+    
     <div class="row">
         <table id="results-table" class="table">
             <thead>
@@ -48,13 +28,6 @@
         </table>
     </div>
 
-
-
-
-
-
-
-
     <div class="row">
         <div class="col-md-offset-6">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#popUpCreatePerson">Create New Person</button>
@@ -74,7 +47,7 @@
 
             <!-- body form -->
             <div class="modal-body">
-                @*<iframe src='@Url.Action("Create")'></iframe>*@
+               
                 @Html.Partial("Create", new DCComics.Model.Person())
 
             </div>
@@ -165,28 +138,7 @@
      @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
     $(document).ready(function () {
-
-
-
-        $("#popUpEditPerson").on("click", function (event) {
-            /* if you want to use the same modal, you must unbind() actions because bootstrap
-               remember olders actions on Modal element */
-            alert('Hello world!');
-            //$("#popUpEditPerson").unbind();
-            //var btn = $(this);
-            //var id = $(this).data("id"); /* "data-id" attribute in html */
-            //$.ajax({
-            //    type: 'POST',
-            //    //url: content_direct_delivery_in_html,
-            //    data: { id: id },
-            //    success: function (html) {
-            //        $('#popUpEditPerson').modal().on('shown.bs.modal', function (e) {
-            //            $("#popUpEditPerson_body").html(html);
-            //        });
-            //    }
-            //});
-        });
-         
+        
         var table = $("#results-table").DataTable({
             ajax: {
                 url: '@Url.Action("GetPeople", "Person")',
