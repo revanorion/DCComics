@@ -35,10 +35,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary" data-id="@Model.Id" data-type="Edit" data-toggle="modal" data-target="#popUpEditPerson">Edit</button>
+                <button type="button" class="btn btn-primary" data-request-url="@Url.Action("Edit", "Person")" data-id="@Model.Id" data-type="Edit" data-toggle="modal" data-target="#popUpEdit">Edit</button>
             </div>
             <div class="col-lg-offset-10">
-                <button type="button" class="btn btn-danger" data-id="@Model.Id" data-type="Delete" @*data-dismiss="modal" data-toggle="modal"*@ data-target="#popUpDeletePerson">Delete</button>
+                <button type="button" class="btn btn-danger" data-request-url="@Url.Action("Delete", "Person")" data-id="@Model.Id" data-type="Delete" data-toggle="modal" data-target="#popUpDelete">Delete</button>
             </div>
         </div>
     </div>
@@ -46,9 +46,9 @@
 
 
 
+<script type="text/javascript" src="~/Scripts/modalActions.js"></script>
 
-
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(document).ready(function () {
 
         $('[data-type="Edit"]').on("click", function () {
@@ -83,4 +83,4 @@
         });
     });
 
-</script>
+</script>*@

@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code Tables\LocationTypeRepository.cs" />
     <Compile Include="Common\GenericRepository.cs" />
     <Compile Include="Common\IGenericRepository.cs" />
+    <Compile Include="Common\ILocationTypeRepository.cs" />
     <Compile Include="Common\IPersonRepository.cs" />
     <Compile Include="Common\IUnitOfWork.cs" />
     <Compile Include="PersonRepository.cs" />

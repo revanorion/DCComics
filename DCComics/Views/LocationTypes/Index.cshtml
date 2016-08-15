@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DCComics.Model.Person>
+﻿@model IEnumerable<DCComics.Model.Code_Tables.LocationType>
 
 @{
     ViewBag.Title = "Index";
@@ -10,23 +10,26 @@
 
 <h2>Index</h2>
 <div class="container-fluid">
-    
+
     <div class="row">
-        <table id="person-results-table" data-request-url="@Url.Action("GetPeople", "Person")" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0">
+        <table id="location-type-results-table" data-request-url="@Url.Action("GetLocationTypes", "LocationTypes")" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0">
             <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Id)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
+                        @Html.DisplayNameFor(model => model.LocationTypeCode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LastName)
+                        @Html.DisplayNameFor(model => model.LocationTypeDesc)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Address)
+                        @Html.DisplayNameFor(model => model.StartDate)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>                    
                 </tr>
             </thead>
         </table>
@@ -34,8 +37,8 @@
 
     <div class="row">
         <div class="col-md-offset-6">
-            <button type="button" class="btn btn-success" id="createNewButton">Create New Person</button>
-        </div>        
+            <button type="button" class="btn btn-success" id="createNewButton">Create New Location Type</button>
+        </div>
     </div>
 </div>
 
@@ -47,16 +50,16 @@
 
 
 
-     @section scripts
+@section scripts
 {
-     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
     $(document).ready(function () {
-        
-        var table = $("#person-results-table").DataTable({
+
+        var table = $("#location-type-results-table").DataTable({
             ajax: {
-                url: '@Url.Action("GetPeople", "Person")',
+                url: '@Url.Action("GetLocationTypes", "LocationTypes")',
                 type: 'POST',
                 dataSrc: "",
                 //dataType: 'json',
@@ -69,56 +72,60 @@
             language: {
                 search: "Filter:"
             },
-            order: [[1, "asc"]],          
+            order: [[1, "asc"]],
             columns: [
                 {
                     data: "Id",
                     visible: false
                 },
                 {
-                    data: "FirstName",
+                    data: "LocationTypeCode",
                     visible: true,
 
                 },
              {
-                 data: "LastName",
+                 data: "LocationTypeDesc",
                  visible: true
              },
               {
-                  data: "Address",
+                  data: "StartDate",
+                  visible: true
+              },
+              {
+                  data: "EndDate",
                   visible: true
               }
             ]
         });
-
+  
         $("#createNewButton").on('click', function () {            
             $.ajax({
-                url: '@Url.Action("Create", "Person")',
+                url: '@Url.Action("Create", "LocationTypes")',
                 type: 'GET',
                 dataType: 'html',
                 success: function (data) {
                     $('#popUpCreatePartialView').html(data);
                     $('#popUpCreate').modal('show')
                 }
-            });           
+            });
         });
 
-        $("#person-results-table tbody").on('click', 'tr', function () {
+
+        $("#location-type-results-table tbody").on('click', 'tr', function () {
             var mydata = table.row(this).data();
             //alert('You clicked on ' + data.FirstName + '\'s row');
             $.ajax({
-                url: '@Url.Action("Details", "Person")',
+                url: '@Url.Action("Details", "LocationTypes")',
                 type: 'GET',
                 data: {'id' : mydata.Id},
                 dataType: 'html',
-                success: function (data) {                   
-                    $('#popUpTableItemPartialView').html(data);                    
+                success: function (data) {
+                    $('#popUpTableItemPartialView').html(data);
                     $('#popUpTableItemView').modal('show')
                 }
-            });           
-        });
+            });
+        });       
 
-         
     });
-    </script>
+</script>
 }

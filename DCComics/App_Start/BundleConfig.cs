@@ -31,7 +31,9 @@ namespace DCComics
                       "~/Content/themes/base/*.css",
                       "~/Content/ErrorHandle.scss",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
-                      "~/Content/General.css")                      
+                      "~/Content/General.css",
+                      "~/Content/fdo.css",
+                      "~/Content/fdo-custom-bootstrap.css")                      
                       );
 
             BundleTable.EnableOptimizations = true;

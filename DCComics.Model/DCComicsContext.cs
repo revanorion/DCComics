@@ -50,5 +50,7 @@ namespace DCComics.Model
             }
             return base.SaveChanges();
         }
+
+        public System.Data.Entity.DbSet<DCComics.Model.Code_Tables.LocationType> LocationTypes { get; set; }
     }
 }

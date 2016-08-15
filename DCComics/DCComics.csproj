@@ -141,6 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Code Tables\LocationTypesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -300,6 +301,8 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\fdo-custom-bootstrap.css" />
+    <Content Include="Content\fdo.css" />
     <Content Include="Content\General.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -466,6 +469,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modalActions.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -486,6 +490,12 @@
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Shared\_PersonInList.cshtml" />
+    <Content Include="Views\Shared\_modals.cshtml" />
+    <Content Include="Views\LocationTypes\Create.cshtml" />
+    <Content Include="Views\LocationTypes\Delete.cshtml" />
+    <Content Include="Views\LocationTypes\Details.cshtml" />
+    <Content Include="Views\LocationTypes\Edit.cshtml" />
+    <Content Include="Views\LocationTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

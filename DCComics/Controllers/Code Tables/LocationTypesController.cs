@@ -7,116 +7,119 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DCComics.Model;
+using DCComics.Model.Code_Tables;
 
-namespace DCComics.Controllers
+namespace DCComics.Controllers.Code_Tables
 {
-    public class PersonController : Controller
+    public class LocationTypesController : Controller
     {
         private DCComicsContext db = new DCComicsContext();
 
-        // GET: Person
+        // GET: LocationTypes
         public ActionResult Index()
         {
-            return View(db.Persons.ToList());
+            return View(db.LocationTypes.ToList());
         }
 
         [HttpPost]
-        [ActionName("GetPeople")]
-        public ActionResult GetPeople()
+        [ActionName("GetLocationTypes")]
+        public ActionResult GetLocationTypes()
         {
-            return Json(db.Persons.ToList(), JsonRequestBehavior.AllowGet);            
+            return Json(db.LocationTypes.ToList(), JsonRequestBehavior.AllowGet);
         }
-        // GET: Person/Details/5
-        public ActionResult Details(long? id)
+
+
+        // GET: LocationTypes/Details/5
+        public ActionResult Details(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            LocationType locationType = db.LocationTypes.Find(id);
+            if (locationType == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(person);
+            return PartialView(locationType);
         }
 
-        // GET: Person/Create
+        // GET: LocationTypes/Create
         public ActionResult Create()
         {
             return PartialView();
         }
 
-        // POST: Person/Create
+        // POST: LocationTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birthday,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
+        public ActionResult Create([Bind(Include = "LocationTypeId,LocationTypeCode,LocationTypeDesc,StartDate,EndDate,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,Id")] LocationType locationType)
         {
             if (ModelState.IsValid)
             {
-                db.Persons.Add(person);
+                db.LocationTypes.Add(locationType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(person);
+            return View(locationType);
         }
 
-        // GET: Person/Edit/5
-        public ActionResult Edit(long? id)
+        // GET: LocationTypes/Edit/5
+        public ActionResult Edit(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            LocationType locationType = db.LocationTypes.Find(id);
+            if (locationType == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(person);
+            return PartialView(locationType);
         }
 
-        // POST: Person/Edit/5
+        // POST: LocationTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Birthday,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
+        public ActionResult Edit([Bind(Include = "LocationTypeId,LocationTypeCode,LocationTypeDesc,StartDate,EndDate,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,Id")] LocationType locationType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
+                db.Entry(locationType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(person);
+            return View(locationType);
         }
 
-        // GET: Person/Delete/5
-        public ActionResult Delete(long? id)
+        // GET: LocationTypes/Delete/5
+        public ActionResult Delete(byte? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            LocationType locationType = db.LocationTypes.Find(id);
+            if (locationType == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(person);
+            return PartialView(locationType);
         }
 
-        // POST: Person/Delete/5
+        // POST: LocationTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(byte id)
         {
-            Person person = db.Persons.Find(id);
-            db.Persons.Remove(person);
+            LocationType locationType = db.LocationTypes.Find(id);
+            db.LocationTypes.Remove(locationType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code Tables\LocationType.cs" />
     <Compile Include="Common\AuditableEntity.cs" />
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IAuditableEntity.cs" />
