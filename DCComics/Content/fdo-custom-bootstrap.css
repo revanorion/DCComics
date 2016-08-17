@@ -232,10 +232,20 @@ form {
 
 .table TH {
     text-align: center;
-    background-color: #8BC1E8;
-    color: white;
+    background-color: #6e9fc3;
+    color: black;
     vertical-align: middle !important;
 }
+
+.dataTable > thead > tr > th[class*="sort"]:after{
+    content: "" !important;
+}
+
+/*table.dataTable thead .sorting, 
+table.dataTable thead .sorting_asc, 
+table.dataTable thead .sorting_desc {
+    background : none;
+}*/
 
 /*.label {
     display: inline;
@@ -332,6 +342,11 @@ form {
 .pagination {
     margin-top: 0 !important;
 }
+
+.paginate_button {
+    padding: 0 !important;
+}
+
 
 /*menu side bar*/
 .navbar-default .active { background:blue }

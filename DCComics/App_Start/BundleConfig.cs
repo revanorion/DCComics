@@ -26,15 +26,21 @@ namespace DCComics
                         "~/Scripts/common.js"));
 
             bundles.Add(new StyleBundle("~/bundles/styles").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/themes/base/*.css",
-                      "~/Content/ErrorHandle.scss",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css",
-                      "~/Content/General.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/bootstrap-dialog.css",
+                      "~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css",
+                      "~/Content/toastr.css",
+                      "~/Content/bootstrap-datepicker.min.css",
+                      "~/Content/bootstrap-datepicker3.min.css",
+                      "~/Content/bootstrap-datetimepicker.min.css",
+                      "~/Content/DataTables/css/jquery.dataTables.min.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.min.css",
+                      "~/Content/fdo-custom-bootstrap.css",
+                // "~/Content/site.css",
                       "~/Content/fdo.css",
-                      "~/Content/fdo-custom-bootstrap.css")                      
-                      );
+                      "~/Content/General.css"
+                      ));
 
             BundleTable.EnableOptimizations = true;
         }

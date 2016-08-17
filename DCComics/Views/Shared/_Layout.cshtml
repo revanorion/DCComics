@@ -7,6 +7,9 @@
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/bundles/styles")
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/datatables")
 </head>
 <body>
     <nav id="menuDiv" class="navbar">
@@ -47,8 +50,6 @@
         @RenderBody()
 
     </div>
-    @Scripts.Render("~/bundles/scripts")
-    @RenderSection("scripts", required: false)
-    @Scripts.Render("~/bundles/datatables")
+
 </body>
 </html>

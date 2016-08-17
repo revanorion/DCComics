@@ -5,11 +5,13 @@
 
 }
 
+
 @using (Html.BeginForm("Create","Person",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <h4>Person</h4>
     <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -43,7 +45,9 @@
     </div>
 }
 
+@Scripts.Render("~/bundles/jqueryval")
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+
+
+

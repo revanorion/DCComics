@@ -1,14 +1,37 @@
-﻿.grid-header
-{
-    font:bold;
-
-}
-.grid-row{
-
-
-
+﻿tbody tr {
+    cursor: pointer;
 }
 
-td.highlight {
-    background-color: whitesmoke !important;
+/*Modal Dialog*/
+.modal-dialog {
+  /*top:50% !important;
+  transform: translate(0, -50%) !important;
+  -ms-transform: translate(0, -50%) !important;
+  -webkit-transform: translate(0, -50%) !important;*/
+  margin:auto 5%;
+  width:50%;
+  height:50%;
+
+}
+
+.modal-header{
+     background-color: #3498db !important; /* #5D95CF - light blue, 0B69AB - dark blue, 42627C - darker blue*/
+    color: #ffffff !important;
+    font-weight: bold;
+    padding:8px;
+}
+
+.modal-content {
+  /*min-height:100%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;*/ 
+
+  background: #C8DFF6; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #8BC1E8, #fffbfb); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #8BC1E8, #fffbfb); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right,#8BC1E8, #fffbfb); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #8BC1E8, #fffbfb); /* Standard syntax */
 }
