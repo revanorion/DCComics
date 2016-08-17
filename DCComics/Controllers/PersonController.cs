@@ -7,24 +7,33 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DCComics.Model;
+using DCComics.Service;
 
 namespace DCComics.Controllers
 {
     public class PersonController : Controller
     {
-        private DCComicsContext db = new DCComicsContext();
+        //private DCComicsContext db = new DCComicsContext();
+
+        IPersonService _PersonService;
+        
+        public PersonController(IPersonService PersonService)
+        {
+            _PersonService = PersonService;
+           
+        }
 
         // GET: Person
         public ActionResult Index()
         {
-            return View(db.Persons.ToList());
+            return View(_PersonService.GetAll());
         }
 
         [HttpPost]
         [ActionName("GetPeople")]
         public ActionResult GetPeople()
         {
-            return Json(db.Persons.ToList(), JsonRequestBehavior.AllowGet);            
+            return Json(_PersonService.GetAll().ToList(), JsonRequestBehavior.AllowGet);            
         }
         // GET: Person/Details/5
         public ActionResult Details(long? id)
@@ -33,7 +42,7 @@ namespace DCComics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = _PersonService.GetById(id.Value);
             if (person == null)
             {
                 return HttpNotFound();
@@ -52,12 +61,11 @@ namespace DCComics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birthday,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
         {
             if (ModelState.IsValid)
             {
-                db.Persons.Add(person);
-                db.SaveChanges();
+                _PersonService.Create(person);                
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +79,7 @@ namespace DCComics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = _PersonService.GetById(id.Value);
             if (person == null)
             {
                 return HttpNotFound();
@@ -84,12 +92,11 @@ namespace DCComics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Birthday,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
-                db.SaveChanges();
+                _PersonService.Update(person);
                 return RedirectToAction("Index");
             }
             return View(person);
@@ -102,7 +109,7 @@ namespace DCComics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = _PersonService.GetById(id.Value);
             if (person == null)
             {
                 return HttpNotFound();
@@ -115,19 +122,9 @@ namespace DCComics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Person person = db.Persons.Find(id);
-            db.Persons.Remove(person);
-            db.SaveChanges();
+            Person person = _PersonService.GetById(id);
+            _PersonService.Delete(person);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
