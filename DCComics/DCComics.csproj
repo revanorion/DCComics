@@ -142,6 +142,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Code Tables\LocationTypesController.cs" />
+    <Compile Include="Controllers\CodeTablesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -509,6 +510,7 @@
     <Content Include="Views\LocationTypes\Details.cshtml" />
     <Content Include="Views\LocationTypes\Edit.cshtml" />
     <Content Include="Views\LocationTypes\Index.cshtml" />
+    <Content Include="Views\CodeTables\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

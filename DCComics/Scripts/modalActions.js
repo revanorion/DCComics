@@ -29,4 +29,43 @@
             }
         });
     });
+
+
+    //For Single Modal
+
+    //$('[data-type="Edit"]').on("click", function () {       
+    //    $.ajax({
+    //        url: $(this).data('request-url'),
+    //        type: 'GET',
+    //        data: { 'id': $(this).data("id") },
+    //        dataType: 'html',
+    //        success: function (data) {
+    //            $('#popUpEntityItemPartialView').html(data);
+    //            $('#popUpHeaderText').html($(this).data('header-text'));
+    //            $('#popUpEntityItem').modal('show')
+    //        }
+    //    });
+    //});
+
+
+    //$('[data-type="Delete"]').on("click", function () {       
+    //    $.ajax({
+    //        url: $(this).data('request-url'),
+    //        type: 'GET',
+    //        data: { 'id': $(this).data("id") },
+    //        dataType: 'html',
+    //        success: function (data) {
+    //            $('#popUpEntityItemPartialView').html(data);
+    //            $('#popUpHeaderText').html($(this).data('header-text'));
+    //            $('#popUpEntityItem').modal('show')
+    //        }
+    //    });
+    });
+
+
+
+
+
+
+
 });

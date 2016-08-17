@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = null;
 }
 
 @Html.Partial("_modals")
@@ -29,7 +30,7 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.EndDate)
-                    </th>                    
+                    </th>
                 </tr>
             </thead>
         </table>
@@ -49,12 +50,12 @@
 
 
 
+@Styles.Render("~/bundles/styles")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/datatables")
+@Scripts.Render("~/bundles/jqueryval")
 
-@section scripts
-{
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
 
         var table = $("#location-type-results-table").DataTable({
@@ -97,8 +98,8 @@
               }
             ]
         });
-  
-        $("#createNewButton").on('click', function () {            
+
+        $("#createNewButton").on('click', function () {
             $.ajax({
                 url: '@Url.Action("Create", "LocationTypes")',
                 type: 'GET',
@@ -117,15 +118,14 @@
             $.ajax({
                 url: '@Url.Action("Details", "LocationTypes")',
                 type: 'GET',
-                data: {'id' : mydata.Id},
+                data: { 'id': mydata.Id },
                 dataType: 'html',
                 success: function (data) {
                     $('#popUpTableItemPartialView').html(data);
                     $('#popUpTableItemView').modal('show')
                 }
             });
-        });       
+        });
 
     });
 </script>
-}

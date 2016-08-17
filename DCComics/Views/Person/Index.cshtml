@@ -1,31 +1,38 @@
 ﻿@model IEnumerable<DCComics.Model.Person>
-
 @{
     ViewBag.Title = "Index";
+    Layout = null;
 }
 
 @Html.Partial("_modals")
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="page-header2">
+            Person
+        </h2>
 
-<div class="panel panel-default" style="min-width:600px">
-    <div class="panel-heading">
-        Index
-    </div>
+        <div class="panel panel-default" style="min-width:600px">
+            <div class="panel-heading">
+                Index
+            </div>
 
-    <div class="panel-body data-table panel-body-background">
-        <div class="col-md-12">
-            <table id="person-results-table" data-request-url="@Url.Action("GetPeople", "Person")" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.Id)</th>
-                        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
-                        <th>@Html.DisplayNameFor(model => model.LastName)</th>
-                        <th>@Html.DisplayNameFor(model => model.Address)</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div>
-            <button type="button" class="btn btn-success" id="createNewButton">Create New Person</button>
+            <div class="panel-body data-table panel-body-background">
+                <div class="col-md-12">
+                    <table id="person-results-table" data-request-url="@Url.Action("GetPeople", "Person")" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success" id="createNewButton">Create New Person</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -35,86 +42,85 @@
 
 
 
+@Styles.Render("~/bundles/styles")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/datatables")
+@Scripts.Render("~/bundles/jqueryval")
 
+<script type="text/javascript">
+    $(document).ready(function () {
 
-@section scripts
-{
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            var table = $("#person-results-table").DataTable({
-                ajax: {
-                    url: '@Url.Action("GetPeople", "Person")',
-                    type: 'POST',
-                    dataSrc: "",
-                    //dataType: 'json',
-                    error: function (reponse) {
-                        alert("error : " + reponse);
-                    }
+        var table = $("#person-results-table").DataTable({
+            ajax: {
+                url: '@Url.Action("GetPeople", "Person")',
+                type: 'POST',
+                dataSrc: "",
+                //dataType: 'json',
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            },
+            columnDefs: [
+            { className: "dt-head-center dt-body-right", "width": "40px", "targets": 0 },
+            { className: "dt-head-center dt-body-center", "width": "80px", "targets": 1 },
+            { className: "dt-head-center", "width": "150px", "targets": 2 },
+            { className: "dt-head-center", "width": "200px", "targets": 3 }
+            ],
+            lengthMenu: [[10, 15, 20, 50, -1], [10, 15, 20, 50, "All"]],
+            pageLength: 20,
+            language: {
+                search: "Filter:"
+            },
+            order: [[0, "desc"]],
+            columns: [
+                {
+                    data: "Id",
+                    visible: false
                 },
-                columnDefs: [
-                { className: "dt-head-center dt-body-right", "width": "40px", "targets": 0 },
-                { className: "dt-head-center dt-body-center", "width": "80px", "targets": 1 },
-                { className: "dt-head-center", "width": "150px", "targets": 2 },
-                { className: "dt-head-center", "width": "200px", "targets": 3 }
-                ],
-                lengthMenu: [[10, 15, 20, 50, -1], [10, 15, 20, 50, "All"]],
-                pageLength: 20,
-                language: {
-                    search: "Filter:"
+                {
+                    data: "FirstName",
+                    visible: true,
+
                 },
-                order: [[0, "desc"]],
-                columns: [
-                    {
-                        data: "Id",
-                        visible: false
-                    },
-                    {
-                        data: "FirstName",
-                        visible: true,
-
-                    },
-                 {
-                     data: "LastName",
-                     visible: true
-                 },
-                  {
-                      data: "Address",
-                      visible: true
-                  }
-                ]
-            });
-
-            $("#createNewButton").on('click', function () {
-                $.ajax({
-                    url: '@Url.Action("Create", "Person")',
-                    type: 'GET',
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#popUpCreatePartialView').html(data);
-                        $('#popUpCreate').modal('show')
-                    }
-                });
-            });
-
-            $("#person-results-table tbody").on('click', 'tr', function () {
-                var mydata = table.row(this).data();
-                //alert('You clicked on ' + data.FirstName + '\'s row');
-                $.ajax({
-                    url: '@Url.Action("Details", "Person")',
-                    type: 'GET',
-                    data: { 'id': mydata.Id },
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#popUpTableItemPartialView').html(data);
-                        $('#popUpTableItemView').modal('show')
-                    }
-                });
-            });
-
-
+             {
+                 data: "LastName",
+                 visible: true
+             },
+              {
+                  data: "Address",
+                  visible: true
+              }
+            ]
         });
-    </script>
-}
+
+        $("#createNewButton").on('click', function () {
+            $.ajax({
+                url: '@Url.Action("Create", "Person")',
+                type: 'GET',
+                dataType: 'html',
+                success: function (data) {
+                    $('#popUpCreatePartialView').html(data);
+                    $('#popUpCreate').modal('show')
+                }
+            });
+        });
+
+        $("#person-results-table tbody").on('click', 'tr', function () {
+            var mydata = table.row(this).data();
+            //alert('You clicked on ' + data.FirstName + '\'s row');
+            $.ajax({
+                url: '@Url.Action("Details", "Person")',
+                type: 'GET',
+                data: { 'id': mydata.Id },
+                dataType: 'html',
+                success: function (data) {
+                    $('#popUpTableItemPartialView').html(data);
+                    $('#popUpTableItemView').modal('show')
+                }
+            });
+        });
+
+
+    });
+</script>
+

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Code Tables";
+}
+
+<h2>Code Tables</h2>
+<select id="list" class="form-control">
+    <option data-request-url="@Url.Action("Index","Person")">        Person *    </option> 
+    <option data-request-url="@Url.Action("Index","LocationTypes")">        Location Type *    </option>
+    <option data-request-url="@Url.Action("#","#")">        Aia    </option>
+    <option data-request-url="@Url.Action("#","#")">        Classification    </option>
+    <option data-request-url="@Url.Action("#","#")">        Control Type    </option>
+    <option data-request-url="@Url.Action("#","#")">        Crew    </option>
+    <option data-request-url="@Url.Action("#","#")">        Department    </option>
+    <option data-request-url="@Url.Action("#","#")">        Division    </option>
+    <option data-request-url="@Url.Action("#","#")">        Failure Class    </option>
+    <option data-request-url="@Url.Action("#","#")">        Location Status    </option>
+    <option data-request-url="@Url.Action("#","#")">        Location Status History    </option>
+    <option data-request-url="@Url.Action("#","#")">        Location Type    </option>
+    <option data-request-url="@Url.Action("#","#")">        Owner Status    </option>
+    <option data-request-url="@Url.Action("#","#")">        Problem Code    </option>
+    <option data-request-url="@Url.Action("#","#")">        Region    </option>
+    <option data-request-url="@Url.Action("#","#")">        Repair Code    </option>
+    <option data-request-url="@Url.Action("#","#")">        Section    </option>
+    <option data-request-url="@Url.Action("#","#")">        Trade    </option>
+    <option data-request-url="@Url.Action("#","#")">        Work Order Status    </option>
+    <option data-request-url="@Url.Action("#","#")">        Work Type    </option>
+</select>
+
+<div id="codeTableView"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        //function selectCodeTable() {
+        //    var codeList = document.getElementById("list");
+
+        //    alert(codeList.value + " " + codeList.getAttribute("data-request-url"));
+
+        //}
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("Index","Person")',
+                type: 'GET',
+                dataType: 'html',
+                success: function (data) {
+                    $('#codeTableView').html(data);
+                }
+            });
+
+            $("#list").on('change', function (e) {                
+                $.ajax({
+                    url: this.options[e.target.selectedIndex].getAttribute("data-request-url"),
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#codeTableView').html(data);
+                    }
+                });
+
+            })
+
+
+
+        });
+    </script>
+}
