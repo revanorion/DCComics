@@ -53,6 +53,7 @@
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IAuditableEntity.cs" />
     <Compile Include="Common\IEntity.cs" />
+    <Compile Include="ControlType.cs" />
     <Compile Include="DCComicsContext.cs" />
     <Compile Include="Migrations\201608191551190_initial.cs" />
     <Compile Include="Migrations\201608191551190_initial.Designer.cs">

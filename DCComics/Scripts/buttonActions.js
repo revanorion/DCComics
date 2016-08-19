@@ -31,6 +31,23 @@ $(document).on('click', '.results-table tbody tr', function () {
     });
 });
 
+$(document).on('click', '#LocationTypesTable tbody tr', function () {
+
+    var mydata = table.row(this).data();
+    var headerText = $('#LocationTypesTable').data('modal-header');
+    $.ajax({
+        url: $('#LocationTypesTable').data('request-url'),
+        type: 'GET',
+        data: { 'id': mydata.Id },
+        dataType: 'html',
+        success: function (data) {
+            $('#modalHeaderText').html(headerText);
+            $('#popUpEntityPartialView').html(data);
+            $('#popUpEntityView').modal('show');
+        }
+    });
+});
+
 
 $(document).on('click', '.editButton', function () {
     $.ajax({

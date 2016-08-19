@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DCComics.Model.ControlType>
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="page-header2">
+            Person
+        </h2>
+
+        <div class="panel panel-default" style="min-width:600px">
+            <div class="panel-heading">
+                Index
+            </div>
+
+            <div class="panel-body data-table panel-body-background">
+                <div class="col-md-12">
+                    @* I Changed to class from id for javascript reference *@
+                    <table data-request-url="@Url.Action("Edit", "ControlTypes")" data-table-request-url="@Url.Action("GetControlTypes", "ControlTypes")" data-modal-header="Edit Control Type" class="results-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.ControlTypeId)</th>
+                                <th>@Html.DisplayNameFor(model => model.ControlTypeName)</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success createNewButton" data-request-url="@Url.Action("Create", "ControlTypes")" data-modal-header="Create New Control Type">Create New Control Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    //$(document).ready(function () {
+
+    //I Changed $(".results-table")
+    var table = $('.results-table').DataTable({
+        ajax: {
+            url: $('.results-table').data('table-request-url'),
+            type: 'POST',
+            dataSrc: "",
+            //dataType: 'json',
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        },
+        columnDefs: [
+        { className: "dt-head-center dt-body-right", "width": "40px", "targets": 0 },
+        { className: "dt-head-center dt-body-center", "width": "80px", "targets": 1 },
+        { className: "dt-head-center", "width": "150px", "targets": 2 },
+        { className: "dt-head-center", "width": "200px", "targets": 3 }
+        ],
+        lengthMenu: [[10, 15, 20, 50, -1], [10, 15, 20, 50, "All"]],
+        pageLength: 20,
+        language: {
+            search: "Filter:"
+        },
+        order: [[0, "desc"]],
+        columns: [
+            {
+                data: "ControlTypeId",
+                visible: false
+            },
+            {
+                data: "ControlTypeName",
+                visible: true,
+            }        
+        ]
+    });
+</script>

@@ -13,7 +13,7 @@
     <option data-request-url="@Url.Action("Index","LocationTypes")">        Location Type *    </option>
     <option data-request-url="@Url.Action("#","#")">        Aia    </option>
     <option data-request-url="@Url.Action("#","#")">        Classification    </option>
-    <option data-request-url="@Url.Action("#","#")">        Control Type    </option>
+    <option data-request-url="@Url.Action("Index","ControlTypes")">        Control Type *   </option>
     <option data-request-url="@Url.Action("#","#")">        Crew    </option>
     <option data-request-url="@Url.Action("#","#")">        Department    </option>
     <option data-request-url="@Url.Action("#","#")">        Division    </option>
@@ -67,16 +67,17 @@
             });*@
 
             $("#list").on('change', function (e) {
-                var tables = $('.results-table').DataTable();
-                tables.destroy();
-                $.ajax({
-                    url: this.options[e.target.selectedIndex].getAttribute("data-request-url"),
-                    type: 'GET',
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#codeTableView').html(data);
-                    }
-                });
+                var link = this.options[e.target.selectedIndex].getAttribute("data-request-url");
+                $('#codeTableView').load('\\' + link + '\\Index');
+               
+                //$.ajax({
+                //    url: this.options[e.target.selectedIndex].getAttribute("data-request-url"),
+                //    type: 'GET',
+                //    dataType: 'html',
+                //    success: function (data) {
+                //        $('#codeTableView').html(data);
+                //    }
+                //});
 
             })
 

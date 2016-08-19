@@ -50,7 +50,7 @@
 
     </dl>
 
-    @using (Html.BeginForm("Delete", "LocationType", new { id = Model.Id }, FormMethod.Post))
+    @using (Html.BeginForm("Delete", "LocationType", new { id = Model.LocationTypeId }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 

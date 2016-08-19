@@ -21,6 +21,7 @@ namespace DCComics.Model
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
+        public DbSet<ControlType> ControlTypes { get; set; }
         // public DbSet<Country> Countries { get; set; }
         public override int SaveChanges()
         {

@@ -19,7 +19,7 @@
             <div class="panel-body data-table panel-body-background">
                 <div class="col-md-12">
                     @* I Changed to class from id for javascript reference *@
-                    <table data-request-url="@Url.Action("Details", "Person")" data-table-request-url="@Url.Action("GetPeople", "Person")" data-modal-header="Person Details" class="results-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                    <table data-request-url="@Url.Action("Edit", "Person")" data-table-request-url="@Url.Action("GetPeople", "Person")" data-modal-header="Edit Person" class="results-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.Id)</th>

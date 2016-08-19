@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Code Tables\LocationTypesController.cs" />
     <Compile Include="Controllers\CodeTablesController.cs" />
+    <Compile Include="Controllers\ControlTypesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -512,6 +513,10 @@
     <Content Include="Views\LocationTypes\Edit.cshtml" />
     <Content Include="Views\LocationTypes\Index.cshtml" />
     <Content Include="Views\CodeTables\Index.cshtml" />
+    <Content Include="Views\ControlTypes\Index.cshtml" />
+    <Content Include="Views\ControlTypes\Edit.cshtml" />
+    <Content Include="Views\ControlTypes\Create.cshtml" />
+    <Content Include="Views\ControlTypes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

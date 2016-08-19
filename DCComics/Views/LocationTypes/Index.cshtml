@@ -10,11 +10,11 @@
 
     <div class="row">
         
-        <table data-request-url="@Url.Action("Details", "LocationTypes")" data-table-request-url="@Url.Action("GetLocationTypes", "LocationTypes")" data-modal-header="LocationTypes Details" class="results-table table table-striped table-bordered table-hover table-condensed" cellspacing="0">
+        <table data-request-url="@Url.Action("Edit", "LocationTypes")" id="LocationTypesTable" data-table-request-url="@Url.Action("GetLocationTypes", "LocationTypes")" data-modal-header="LocationTypes Details" class="table table-striped table-bordered table-hover table-condensed" cellspacing="0">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Id)
+                        @Html.DisplayNameFor(model => model.LocationTypeId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.LocationTypeCode)
@@ -43,9 +43,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var table = $(".results-table").DataTable({
+        var table = $("#LocationTypesTable").DataTable({
             ajax: {
-                url: $(".results-table").data('table-request-url'),
+                url: $("#LocationTypesTable").data('table-request-url'),
                 type: 'POST',
                 dataSrc: "",
                 //dataType: 'json',
@@ -61,8 +61,8 @@
             order: [[1, "asc"]],
             columns: [
                 {
-                    data: "Id",
-                    visible: false
+                    data: "LocationTypeId",
+                    visible: true
                 },
                 {
                     data: "LocationTypeCode",
@@ -84,6 +84,21 @@
             ]
         });
 
+        $('#LocationTypesTable tbody').on('click', 'tr', function () {
+            var mydata = table.row(this).data();
+            var headerText = $('#LocationTypesTable').data('modal-header');
+            $.ajax({
+                url: $('#LocationTypesTable').data('request-url'),
+                type: 'GET',
+                data: { 'id': mydata.LocationTypeId },
+                dataType: 'html',
+                success: function (data) {
+                    $('#modalHeaderText').html(headerText);
+                    $('#popUpEntityPartialView').html(data);
+                    $('#popUpEntityView').modal('show');
+                }
+            });
+        });
         //$(".createNewButton").on('click', function () {
         //    var headerText = $(this).data('modal-header');
         //    $.ajax({
@@ -97,23 +112,5 @@
         //        }
         //    });
         //});
-
-
-        $(".results-table tbody").on('click', 'tr', function () {
-            var mydata = table.row(this).data();
-            var headerText = $('.results-table').data('modal-header');            
-            $.ajax({
-                url: $('.results-table').data('request-url'),
-                type: 'GET',
-                data: { 'id': mydata.Id },
-                dataType: 'html',
-                success: function (data) {
-                    $('#modalHeaderText').html(headerText);
-                    $('#popUpEntityPartialView').html(data);
-                    $('#popUpEntityView').modal('show');
-                }
-            });
-        });
-
     });
 </script>
