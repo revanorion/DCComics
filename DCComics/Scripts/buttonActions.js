@@ -14,8 +14,7 @@ $(document).on('click', '.createNewButton', function () {
 });
 
 $(document).on('click', '.results-table tbody tr', function () {
-    var row = table.row(this);
-    var deta = fnSelect
+    var row = table.row(this);   
 
     var mydata = table.row(this).data();
     var headerText = $('.results-table').data('modal-header');
