@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@Styles.Render("~/bundles/styles")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/datatables")
+@Scripts.Render("~/bundles/jqueryval")
 <div>
 
     <dl class="dl-horizontal">
@@ -21,7 +24,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.LastName)
-        </dd>              
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Address)
@@ -35,10 +38,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary" data-request-url="@Url.Action("Edit", "Person")" data-id="@Model.Id" data-type="Edit" data-toggle="modal" data-target="#popUpEdit">Edit</button>
+                <button type="button" class="btn btn-primary editButton" data-request-url="@Url.Action("Edit", "Person")" data-modal-header="Edit Person" data-id="@Model.Id">Edit</button>
             </div>
             <div class="col-lg-offset-10">
-                <button type="button" class="btn btn-danger" data-request-url="@Url.Action("Delete", "Person")" data-id="@Model.Id" data-type="Delete" data-toggle="modal" data-target="#popUpDelete">Delete</button>
+                <button type="button" class="btn btn-danger deleteButton" data-request-url="@Url.Action("Delete", "Person")" data-modal-header="Delete Person" data-id="@Model.Id">Delete</button>
             </div>
         </div>
     </div>
@@ -46,4 +49,4 @@
 
 
 
-<script type="text/javascript" src="~/Scripts/modalActions.js"></script>
+@*<script type="text/javascript" src="~/Scripts/modalActions.js"></script>*@

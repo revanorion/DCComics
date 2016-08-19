@@ -54,9 +54,9 @@
     <Compile Include="Common\IAuditableEntity.cs" />
     <Compile Include="Common\IEntity.cs" />
     <Compile Include="DCComicsContext.cs" />
-    <Compile Include="Migrations\201608051749087_InitialCreate.cs" />
-    <Compile Include="Migrations\201608051749087_InitialCreate.Designer.cs">
-      <DependentUpon>201608051749087_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201608191551190_initial.cs" />
+    <Compile Include="Migrations\201608191551190_initial.Designer.cs">
+      <DependentUpon>201608191551190_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person.cs" />
@@ -67,8 +67,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608051749087_InitialCreate.resx">
-      <DependentUpon>201608051749087_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608191551190_initial.resx">
+      <DependentUpon>201608191551190_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

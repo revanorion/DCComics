@@ -12,8 +12,7 @@ namespace DCComics.Model.Code_Tables
     [Table("Location_Type")]
     public class LocationType : AuditableEntity<long>
     {
-        [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("LOCATION_TYPE_SEQ")]
         public byte LocationTypeId { get; set; }
 

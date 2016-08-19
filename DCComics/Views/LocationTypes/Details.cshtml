@@ -43,13 +43,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary" data-request-url="@Url.Action("Edit", "LocationTypes")" data-id="@Model.LocationTypeId" data-type="Edit" data-toggle="modal" data-target="#popUpEdit">Edit</button>
+                <button type="button" class="btn btn-primary editButton" data-request-url="@Url.Action("Edit", "LocationTypes")" data-modal-header="Edit Location Types" data-id="@Model.LocationTypeId">Edit</button>
             </div>
             <div class="col-lg-offset-10">
-                <button type="button" class="btn btn-danger" data-request-url="@Url.Action("Delete", "LocationTypes")" data-id="@Model.LocationTypeId" data-type="Delete" data-toggle="modal" data-target="#popUpDelete">Delete</button>
+                <button type="button" class="btn btn-danger deleteButton" data-request-url="@Url.Action("Delete", "LocationTypes")" data-modal-header="Delete Location Types" data-id="@Model.LocationTypeId">Delete</button>
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="~/Scripts/modalActions.js"></script>
+@*<script type="text/javascript" src="~/Scripts/modalActions.js"></script>*@

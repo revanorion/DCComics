@@ -1,7 +1,12 @@
 ﻿@{
     ViewBag.Title = "Code Tables";
 }
+@Styles.Render("~/bundles/styles")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/datatables")
+@Scripts.Render("~/bundles/jqueryval")
 
+@Html.Partial("_modals")
 <h2>Code Tables</h2>
 <select id="list" class="form-control">
     <option data-request-url="@Url.Action("Index","Person")">        Person *    </option> 
@@ -31,25 +36,39 @@
 @section scripts
 {
     <script type="text/javascript">
-
-        //function selectCodeTable() {
-        //    var codeList = document.getElementById("list");
-
-        //    alert(codeList.value + " " + codeList.getAttribute("data-request-url"));
-
-        //}
+        
 
         $(document).ready(function () {
-            $.ajax({
+            var redirectedLink = getParameterByName('redirectedLink');
+            if(redirectedLink==null)
+            {
+                $('#codeTableView').load('@Url.Action("Index","Person")');
+            }
+            else
+            {               
+                $('#codeTableView').load('\\' + redirectedLink + '\\Index');                
+                var sel = document.getElementById('list');
+                var opts = sel.options;
+                for (var opt, j = 0; opt = opts[j]; j++) {                    
+                    if (opt.value.search(redirectedLink) > -1) {
+                        sel.selectedIndex = j;
+                        break;
+                    }
+                }
+            }
+
+            @*$.ajax({
                 url: '@Url.Action("Index","Person")',
                 type: 'GET',
                 dataType: 'html',
                 success: function (data) {
                     $('#codeTableView').html(data);
                 }
-            });
+            });*@
 
-            $("#list").on('change', function (e) {                
+            $("#list").on('change', function (e) {
+                var tables = $('.results-table').DataTable();
+                tables.destroy();
                 $.ajax({
                     url: this.options[e.target.selectedIndex].getAttribute("data-request-url"),
                     type: 'GET',
@@ -61,8 +80,23 @@
 
             })
 
-
-
         });
-    </script>
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+
+
+
+</script>
 }
+
+
+<script src="~/Scripts/buttonActions.js"></script>

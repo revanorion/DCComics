@@ -61,7 +61,7 @@ namespace DCComics.Controllers.Code_Tables
             {
                 db.LocationTypes.Add(locationType);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=LocationTypes");
             }
 
             return View(locationType);
@@ -93,7 +93,7 @@ namespace DCComics.Controllers.Code_Tables
             {
                 db.Entry(locationType).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=LocationTypes");
             }
             return View(locationType);
         }
@@ -121,7 +121,7 @@ namespace DCComics.Controllers.Code_Tables
             LocationType locationType = db.LocationTypes.Find(id);
             db.LocationTypes.Remove(locationType);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=LocationTypes");
         }
 
         protected override void Dispose(bool disposing)

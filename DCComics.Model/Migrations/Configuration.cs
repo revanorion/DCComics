@@ -9,8 +9,7 @@ namespace DCComics.Model.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "DCComics.Model.DCComicsContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(DCComics.Model.DCComicsContext context)

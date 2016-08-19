@@ -1,4 +1,5 @@
 ﻿using DCComics.Model.Common;
+using DCComics.Model.Code_Tables;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace DCComics.Model
 {
@@ -18,6 +20,7 @@ namespace DCComics.Model
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<LocationType> LocationTypes { get; set; }
         // public DbSet<Country> Countries { get; set; }
         public override int SaveChanges()
         {
@@ -50,7 +53,5 @@ namespace DCComics.Model
             }
             return base.SaveChanges();
         }
-
-        public System.Data.Entity.DbSet<DCComics.Model.Code_Tables.LocationType> LocationTypes { get; set; }
     }
 }

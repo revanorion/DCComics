@@ -1,70 +1,39 @@
 ﻿$(document).ready(function () {
-    $('[data-type="Edit"]').on("click", function () {
-        $("#popUpEdit").unbind();
-        $.ajax({
-            url: $(this).data('request-url'),
-            type: 'GET',
-            data: { 'id': $(this).data("id") },
-            dataType: 'html',
-            success: function (data) {
-                $('#popUpEditPartialView').html(data);
-                $('#popUpEdit').modal('show')
-                $('#popUpTableItemView').modal('hide')
-            }
-        });
-    });
+    //For Multiple Modal
 
-
-    $('[data-type="Delete"]').on("click", function () {
-        $("#popUpDelete").unbind();
-        $.ajax({
-            url: $(this).data('request-url'),
-            type: 'GET',
-            data: { 'id': $(this).data("id") },
-            dataType: 'html',
-            success: function (data) {
-                $('#popUpDeletePartialView').html(data);
-                $('#popUpDelete').modal('show')
-                $('#popUpTableItemView').modal('hide')
-            }
-        });
-    });
-
-
-    //For Single Modal
-
-    //$('[data-type="Edit"]').on("click", function () {       
+    //$('[data-type="Edit"]').on("click", function () {
+    //    $("#popUpEdit").unbind();
     //    $.ajax({
     //        url: $(this).data('request-url'),
     //        type: 'GET',
     //        data: { 'id': $(this).data("id") },
     //        dataType: 'html',
     //        success: function (data) {
-    //            $('#popUpEntityItemPartialView').html(data);
-    //            $('#popUpHeaderText').html($(this).data('header-text'));
-    //            $('#popUpEntityItem').modal('show')
+    //            $('#popUpEditPartialView').html(data);
+    //            $('#popUpEdit').modal('show')
+    //            $('#popUpTableItemView').modal('hide')
     //        }
     //    });
     //});
 
 
-    //$('[data-type="Delete"]').on("click", function () {       
+    //$('[data-type="Delete"]').on("click", function () {
+    //    $("#popUpDelete").unbind();
     //    $.ajax({
     //        url: $(this).data('request-url'),
     //        type: 'GET',
     //        data: { 'id': $(this).data("id") },
     //        dataType: 'html',
     //        success: function (data) {
-    //            $('#popUpEntityItemPartialView').html(data);
-    //            $('#popUpHeaderText').html($(this).data('header-text'));
-    //            $('#popUpEntityItem').modal('show')
+    //            $('#popUpDeletePartialView').html(data);
+    //            $('#popUpDelete').modal('show')
+    //            $('#popUpTableItemView').modal('hide')
     //        }
     //    });
-    });
+    //});
 
 
-
-
+    //For Single Modal
 
 
 

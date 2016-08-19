@@ -52,14 +52,16 @@ namespace DCComics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Birthday,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")] Person person)
         {
             if (ModelState.IsValid)
             {
                 db.Persons.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=Person");
             }
+
+            
 
             return View(person);
         }
@@ -90,7 +92,7 @@ namespace DCComics.Controllers
             {
                 db.Entry(person).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=Person");
             }
             return View(person);
         }
@@ -118,7 +120,7 @@ namespace DCComics.Controllers
             Person person = db.Persons.Find(id);
             db.Persons.Remove(person);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=Person");
         }
 
         protected override void Dispose(bool disposing)
