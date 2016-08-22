@@ -13,14 +13,6 @@
             @Html.DisplayFor(model => model.ControlTypeName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm("Delete", "ControlTypes", new { id = Model.ControlTypeId }, FormMethod.Post))

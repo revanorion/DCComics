@@ -23,8 +23,8 @@ namespace DCComics.Controllers
         [HttpPost]
         [ActionName("GetControlTypes")]
         public ActionResult GetControlTypes()
-        {
-            return Json(db.Persons.ToList(), JsonRequestBehavior.AllowGet);
+        {            
+            return Json(db.ControlTypes.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 

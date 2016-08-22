@@ -59,9 +59,7 @@ namespace DCComics.Controllers
                 db.Persons.Add(person);
                 db.SaveChanges();
                 return Redirect(Request.UrlReferrer.AbsolutePath.ToString() + "?redirectedLink=Person");
-            }
-
-            
+            }           
 
             return View(person);
         }
